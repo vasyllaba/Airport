@@ -1,4 +1,4 @@
-package main.airport.planes.passenger_plane;
+package main.airport.planes;
 
 import main.airport.enums.SeatClass;
 
@@ -32,5 +32,14 @@ public class Seat {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "seatClass=" + seatClass +
+                ", number=" + number +
+                ", available=" + available +
+                '}';
     }
 }

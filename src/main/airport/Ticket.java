@@ -1,7 +1,7 @@
 package main.airport;
 
 import main.airport.people.Passenger;
-import main.airport.planes.passenger_plane.Seat;
+import main.airport.planes.Seat;
 
 public class Ticket {
     private Integer id;

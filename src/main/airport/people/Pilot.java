@@ -10,4 +10,10 @@ public class Pilot extends Worker {
         this.pilotLicense = pilotLicense;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " " +
+                "pilotLicense=" + pilotLicense +
+                '}';
+    }
 }

@@ -1,7 +1,6 @@
-package main.airport.planes.passenger_plane;
+package main.airport.planes;
 
 import main.airport.enums.SeatClass;
-import main.airport.planes.Plane;
 
 import java.util.ArrayList;
 
@@ -11,6 +10,7 @@ public class PassengerPlane extends Plane {
     public PassengerPlane(Integer weight, Integer width, Integer length, Integer speed, String fuelType
             , Integer firstClassSeatsNumber, Integer secondClassSeatsNumber) {
         super(weight, width, length, speed, fuelType);
+        seats = new ArrayList<>();
         createSeats(firstClassSeatsNumber, SeatClass.First);
         createSeats(secondClassSeatsNumber, SeatClass.Second);
     }
@@ -24,7 +24,7 @@ public class PassengerPlane extends Plane {
 
     @Override
     public String toString() {
-        return "PassengerPlane{" +
+        return super.toString() + " " +
                 "seats=" + seats +
                 '}';
     }

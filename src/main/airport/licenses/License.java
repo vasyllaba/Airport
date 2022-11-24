@@ -2,17 +2,13 @@ package main.airport.licenses;
 
 import main.airport.people.Person;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public abstract class License {
-    private Integer id;
-    private Person person;
     private String photo;
-    private Date endDate;
+    private LocalDateTime endDate;
 
-    public License(Integer id, Person person, String photo, Date endDate) {
-        this.id = id;
-        this.person = person;
+    public License( String photo, LocalDateTime endDate) {
         this.photo = photo;
         this.endDate = endDate;
     }
