@@ -1,6 +1,17 @@
 package main.airport.enums;
 
 public enum Gender {
-    Mail,
-    Female
+
+    MALE("male"),
+    FEMALE("female");
+
+    Gender(String gender) {
+        this.gender = gender;
+    }
+
+    public final String gender;
+
+    public String getValue() {
+        return gender;
+    }
 }
