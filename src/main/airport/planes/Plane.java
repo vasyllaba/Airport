@@ -7,6 +7,9 @@ public abstract class Plane {
     private Integer speed;
     private String fuelType;
 
+    public Plane() {
+    }
+
     public Plane(Integer weight, Integer width, Integer length, Integer speed, String fuelType) {
         this.weight = weight;
         this.width = width;
@@ -57,8 +60,7 @@ public abstract class Plane {
 
     @Override
     public String toString() {
-        return "Plane:" +
-                "weight=" + weight +
+        return "weight=" + weight +
                 ", width=" + width +
                 ", length=" + length +
                 ", speed=" + speed +

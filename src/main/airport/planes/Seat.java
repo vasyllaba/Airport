@@ -7,15 +7,13 @@ public class Seat {
     private Integer number;
     private Boolean available;
 
+    public Seat() {
+    }
+
     public Seat(SeatClass seatClass, Integer number, Boolean available) {
         this.seatClass = seatClass;
         this.number = number;
         this.available = available;
-    }
-
-    public Seat(SeatClass seatClass, Integer number) {
-        this.seatClass = seatClass;
-        this.number = number;
     }
 
     public SeatClass getSeatClass() {
