@@ -90,7 +90,7 @@ public class CargoPlane extends Plane {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CargoPlane)) return false;
 
         CargoPlane that = (CargoPlane) o;
 
