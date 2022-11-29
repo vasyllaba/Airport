@@ -98,4 +98,29 @@ public class Trip {
                 ", arrivalTime=" + arrivalTime +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trip)) return false;
+
+        Trip trip = (Trip) o;
+
+        if (getPlane() != null ? !getPlane().equals(trip.getPlane()) : trip.getPlane() != null) return false;
+        if (getFrom() != null ? !getFrom().equals(trip.getFrom()) : trip.getFrom() != null) return false;
+        if (getTo() != null ? !getTo().equals(trip.getTo()) : trip.getTo() != null) return false;
+        if (getDepartureTime() != null ? !getDepartureTime().equals(trip.getDepartureTime()) : trip.getDepartureTime() != null)
+            return false;
+        return getArrivalTime() != null ? getArrivalTime().equals(trip.getArrivalTime()) : trip.getArrivalTime() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getPlane() != null ? getPlane().hashCode() : 0;
+        result = 31 * result + (getFrom() != null ? getFrom().hashCode() : 0);
+        result = 31 * result + (getTo() != null ? getTo().hashCode() : 0);
+        result = 31 * result + (getDepartureTime() != null ? getDepartureTime().hashCode() : 0);
+        result = 31 * result + (getArrivalTime() != null ? getArrivalTime().hashCode() : 0);
+        return result;
+    }
 }

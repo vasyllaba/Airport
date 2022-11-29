@@ -59,4 +59,24 @@ public class Ticket {
                 ", seat=" + seat + '\n' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+
+        Ticket ticket = (Ticket) o;
+
+        if (getId() != null ? !getId().equals(ticket.getId()) : ticket.getId() != null) return false;
+        if (getTrip() != null ? !getTrip().equals(ticket.getTrip()) : ticket.getTrip() != null) return false;
+        return getSeat() != null ? getSeat().equals(ticket.getSeat()) : ticket.getSeat() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getTrip() != null ? getTrip().hashCode() : 0);
+        result = 31 * result + (getSeat() != null ? getSeat().hashCode() : 0);
+        return result;
+    }
 }

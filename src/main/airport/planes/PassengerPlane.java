@@ -3,6 +3,7 @@ package main.airport.planes;
 import main.airport.enums.SeatClass;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PassengerPlane extends Plane {
 
@@ -52,5 +53,23 @@ public class PassengerPlane extends Plane {
                 ", seats=" + seats +
                 ' ' + super.toString() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PassengerPlane)) return false;
+
+        PassengerPlane that = (PassengerPlane) o;
+
+        if (!Objects.equals(trunkVolume, that.trunkVolume)) return false;
+        return Objects.equals(seats, that.seats) && this.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = trunkVolume != null ? trunkVolume.hashCode() : 0;
+        result = 31 * result + (seats != null ? seats.hashCode() : 0);
+        return result + this.hashCode();
     }
 }

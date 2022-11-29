@@ -1,5 +1,7 @@
 package main.airport.planes;
 
+import java.util.Objects;
+
 public abstract class Plane {
     private Integer weight;
     private Integer width;
@@ -66,5 +68,29 @@ public abstract class Plane {
                 ", speed=" + speed +
                 ", fuelType=" + fuelType +
                 ' ';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Plane)) return false;
+
+        Plane plane = (Plane) o;
+
+        if (!Objects.equals(weight, plane.weight)) return false;
+        if (!Objects.equals(width, plane.width)) return false;
+        if (!Objects.equals(length, plane.length)) return false;
+        if (!Objects.equals(speed, plane.speed)) return false;
+        return Objects.equals(fuelType, plane.fuelType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = weight != null ? weight.hashCode() : 0;
+        result = 31 * result + (width != null ? width.hashCode() : 0);
+        result = 31 * result + (length != null ? length.hashCode() : 0);
+        result = 31 * result + (speed != null ? speed.hashCode() : 0);
+        result = 31 * result + (fuelType != null ? fuelType.hashCode() : 0);
+        return result;
     }
 }

@@ -7,10 +7,7 @@ import main.airport.licenses.StewardLicense;
 import main.airport.people.Passenger;
 import main.airport.people.Pilot;
 import main.airport.people.Steward;
-import main.airport.planes.PassengerPlane;
-import main.airport.planes.Seat;
-import main.airport.planes.Ticket;
-import main.airport.planes.Trip;
+import main.airport.planes.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -78,5 +75,12 @@ public class Main {
         System.out.println("--------------------------------------------------");
 
         System.out.println(lic);
+
+        CargoPlane planeC1 = new CargoPlane(100, 6, 15, 480, "Gas",
+                1200, 2.1, true, 3.6, 3.2, 4.0);
+        CargoPlane planeC2 = new CargoPlane(100, 6, 15, 480, "Gas",
+                1200, 2.1, true, 3.1, 3.2, 4.0);
+        System.out.println(planeC1.equals(planeC2));
+
     }
 }

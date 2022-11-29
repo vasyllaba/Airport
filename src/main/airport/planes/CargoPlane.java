@@ -1,5 +1,7 @@
 package main.airport.planes;
 
+import java.util.Objects;
+
 public class CargoPlane extends Plane {
 
     private Integer capacity;
@@ -85,4 +87,35 @@ public class CargoPlane extends Plane {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CargoPlane that = (CargoPlane) o;
+
+        if (!Objects.equals(capacity, that.capacity)) return false;
+        if (!Objects.equals(volume, that.volume)) return false;
+        if (!Objects.equals(isParatroopersAbility, that.isParatroopersAbility))
+            return false;
+        if (!Objects.equals(trunkHeight, that.trunkHeight)) return false;
+        if (!Objects.equals(trunkWidth, that.trunkWidth)) return false;
+        if (this.getWeight() != null ? !this.getWeight().equals(that.getWeight()) : that.getWeight() != null) return false;
+        if (this.getWidth() != null ? !this.getWidth().equals(that.getWidth()) : that.getWidth() != null) return false;
+        if (this.getLength() != null ? !this.getLength().equals(that.getLength()) : that.getLength() != null) return false;
+        if (this.getSpeed() != null ? !this.getSpeed().equals(that.getSpeed()) : that.getSpeed() != null) return false;
+        if (this.getFuelType() != null ? !this.getFuelType().equals(that.getFuelType()) : that.getFuelType() != null) return false;
+        return Objects.equals(trunkLength, that.trunkLength);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = capacity != null ? capacity.hashCode() : 0;
+        result = 31 * result + (volume != null ? volume.hashCode() : 0);
+        result = 31 * result + (isParatroopersAbility != null ? isParatroopersAbility.hashCode() : 0);
+        result = 31 * result + (trunkHeight != null ? trunkHeight.hashCode() : 0);
+        result = 31 * result + (trunkWidth != null ? trunkWidth.hashCode() : 0);
+        result = 31 * result + (trunkLength != null ? trunkLength.hashCode() : 0);
+        return result;
+    }
 }
