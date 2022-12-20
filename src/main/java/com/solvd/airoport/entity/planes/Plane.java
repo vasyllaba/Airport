@@ -51,15 +51,16 @@ public abstract class Plane {
     /**
      * Drop all fuel
      */
-    public void fuelDrop(){
+    public void fuelDrop() {
         LOGGER.info("drop all fuel");
         fuelAmount = 0.0;
     }
 
-    public int dropHeight(int meters){
+    public int dropHeight(int meters) {
         LOGGER.info("call dropHeight()");
         LOGGER.debug("drop flightHeight on " + meters + " meters");
-        return flightHeight-=meters;
+        flightHeight -= meters;
+        return flightHeight;
     }
 
     public Integer getWeight() {

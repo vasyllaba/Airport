@@ -7,6 +7,7 @@ import com.solvd.airoport.entity.planes.Ticket;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Passenger extends Person {
 
@@ -157,8 +158,8 @@ public class Passenger extends Person {
             return false;
         if (getBonusPoint() != null ? !getBonusPoint().equals(passenger.getBonusPoint()) : passenger.getBonusPoint() != null)
             return false;
-        if (onBoard != null ? !onBoard.equals(passenger.onBoard) : passenger.onBoard != null) return false;
-        return underArrest != null ? underArrest.equals(passenger.underArrest) : passenger.underArrest == null;
+        if (!Objects.equals(onBoard, passenger.onBoard)) return false;
+        return Objects.equals(underArrest, passenger.underArrest);
     }
 
     @Override

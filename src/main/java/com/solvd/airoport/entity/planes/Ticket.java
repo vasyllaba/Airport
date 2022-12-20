@@ -1,9 +1,16 @@
 package com.solvd.airoport.entity.planes;
 
+import com.solvd.airoport.entity.interfaces.IPrint;
 import com.solvd.airoport.entity.people.Passenger;
+import com.solvd.airoport.exceptions.TicketIOException;
 import org.apache.log4j.Logger;
 
-public class Ticket {
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Ticket implements IPrint {
+    public static final String COMPANY_NAME = "VasylAirWays";
+    public static final String PATH = "src/main/resources/tickets/";
     private Integer id;
     private Trip trip;
     private Passenger passenger;
@@ -66,6 +73,45 @@ public class Ticket {
         this.seat = seat;
     }
 
+    public String getPassengerFullName() {
+        LOGGER.info("call getPassengerFullName()");
+        return passenger.getName() + ' ' + passenger.getSurname();
+    }
+
+    @Override
+    public void print() {
+        LOGGER.info("call printTicket()");
+        String fileName = passenger.getName() + '_' + passenger.getSurname() +
+                '_' + trip.getFrom() +
+                '_' + trip.getTo();
+        LOGGER.debug("set ticket file name as: " + fileName);
+        try {
+            LOGGER.info("print ticket");
+            setContent(COMPANY_NAME, PATH, fileName, this);
+        } catch (TicketIOException e) {
+            LOGGER.error(TicketIOException.MESSAGE);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
+        LOGGER.info("print successful");
+    }
+
+    private void setContent(String companyName, String path, String fileName, IPrint ticket) throws IOException {
+        LOGGER.info("call setContent method");
+        try (FileWriter fileWriter = new FileWriter(path + fileName, false))
+        {
+            fileWriter.write(companyName);
+            fileWriter.append('\n');
+            fileWriter.write(getPassengerFullName());
+            fileWriter.append('\n');
+            fileWriter.write(trip.getFrom());
+            fileWriter.append('-');
+            fileWriter.write(trip.getTo());
+            fileWriter.append('\n');
+            fileWriter.write(trip.getDepartureTime().toString());
+        }
+    }
+
     @Override
     public String toString() {
         LOGGER.info("call toString()");
@@ -96,6 +142,7 @@ public class Ticket {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getTrip() != null ? getTrip().hashCode() : 0);
         result = 31 * result + (getSeat() != null ? getSeat().hashCode() : 0);
+        LOGGER.debug("hashCode() called - Computed hash: " + result);
         return result;
     }
 }

@@ -2,13 +2,14 @@ package com.solvd.airoport.entity.planes;
 
 import com.solvd.airoport.entity.people.Pilot;
 import com.solvd.airoport.entity.people.Steward;
+import com.solvd.airoport.exceptions.PilotNullPointerException;
 import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
-public class Trip {
+public class Trip {//rename to trip
     private PassengerPlane plane;
     private ArrayList<Pilot> pilots;
     private ArrayList<Steward> stewards;
@@ -20,12 +21,14 @@ public class Trip {
     private static final Logger LOGGER = Logger.getLogger(Trip.class);
 
     public Trip() {
-        LOGGER.debug("create new Trip");
+        LOGGER.debug("create new Journey");
+        this.pilots = new ArrayList<>();
+        this.stewards = new ArrayList<>();
     }
 
     public Trip(PassengerPlane plane, ArrayList<Pilot> pilots, ArrayList<Steward> stewards, String from, String to,
                 LocalDateTime departureTime, LocalDateTime arrivalTime) {
-        LOGGER.debug("create new Trip with params: plane " + plane +
+        LOGGER.debug("create new Journey with params: plane " + plane +
                 ", pilots " + pilots +
                 ", stewards " + stewards +
                 ", from " + from +
@@ -109,6 +112,39 @@ public class Trip {
     public void setStewards(ArrayList<Steward> stewards) {
         LOGGER.info("call setStewards with value " + stewards);
         this.stewards = stewards;
+    }
+
+    public void addSteward(Steward steward) {
+        LOGGER.info("add steward " + steward);
+        this.stewards.add(steward);
+    }
+
+    public void addPilot(Pilot pilot) {
+        LOGGER.info("add pilot " + pilot);
+        checkPilot(pilot);
+        this.pilots.add(pilot);
+    }
+
+    private boolean checkPilot(Pilot pilot){
+        LOGGER.debug("check pilot " + pilot);
+        if (pilot == null) {
+            LOGGER.error(PilotNullPointerException.MESSAGE);
+            throw new PilotNullPointerException(PilotNullPointerException.MESSAGE);
+        }
+        if (pilots == null) {
+            LOGGER.debug("This pilot is first");
+            return true;
+        }
+        return allergyCheck(pilot);
+    }
+    private boolean allergyCheck(Pilot pilot){
+        LOGGER.debug("Check pilots allergy");
+        boolean flag = false;
+        for (Pilot currentPilot: pilots) {
+            if (!currentPilot.getFoodAllergy().equals(pilot.getFoodAllergy()))
+                flag = true;
+        }
+        return flag;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.solvd.airoport.exceptions;
 
 public class IncorrectSpeedValueException extends IllegalArgumentException {
-    public static final String MESSAGE = "speed cannot acquire a negative value";
+    public static final String MESSAGE = "speed cannot be a negative value";
 
     public IncorrectSpeedValueException() {
     }
