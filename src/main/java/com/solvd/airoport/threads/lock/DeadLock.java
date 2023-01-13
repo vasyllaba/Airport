@@ -1,38 +1,42 @@
 package com.solvd.airoport.threads.lock;
 
+import org.apache.log4j.Logger;
+
 public class DeadLock {
+    private static final Logger LOGGER = Logger.getLogger(DeadLock.class);
+
     public static void main(String[] args) {
-        Object lock1 = new Object();
-        Object lock2 = new Object();
+        Object process1 = new Object();
+        Object process2 = new Object();
 
         Thread thread1 = new Thread(() ->{
-            System.out.println(Thread.currentThread().getName() + " start");
-            synchronized (lock1){
+            LOGGER.debug(Thread.currentThread().getName() + " start");
+            synchronized (process1){
                 try {
                     Thread.sleep(1000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
-                synchronized (lock2){
+                synchronized (process2){
 
                 }
             }
-            System.out.println(Thread.currentThread().getName() + " end");
+            LOGGER.debug(Thread.currentThread().getName() + " end");
         }, "Thread 1");
 
         Thread thread2 = new Thread(() ->{
-            System.out.println(Thread.currentThread().getName() + " start");
-            synchronized (lock2){
+            LOGGER.debug(Thread.currentThread().getName() + " start");
+            synchronized (process2){
                 try {
                     Thread.sleep(1000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
-                synchronized (lock1){
+                synchronized (process1){
 
                 }
             }
-            System.out.println(Thread.currentThread().getName() + " end");
+            LOGGER.debug(Thread.currentThread().getName() + " end");
         }, "Thread 2");
 
         thread1.start();
