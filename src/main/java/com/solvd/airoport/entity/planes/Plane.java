@@ -1,5 +1,6 @@
 package com.solvd.airoport.entity.planes;
 
+import com.solvd.airoport.entity.interfaces.IFuelDrop;
 import org.apache.log4j.Logger;
 
 public abstract class Plane {
@@ -54,6 +55,16 @@ public abstract class Plane {
     public void fuelDrop() {
         LOGGER.info("drop all fuel");
         fuelAmount = 0.0;
+    }
+
+    public void fuelDrop(double dropAmount) {
+        LOGGER.info("drop fuel part");
+        if (dropAmount > fuelAmount){
+            fuelDrop();
+            return;
+        }
+        IFuelDrop<Double, Double, Double> function = (arg1, arg2) -> arg1 - arg2;
+        fuelAmount = function.drop(fuelAmount, dropAmount);
     }
 
     public int dropHeight(int meters) {

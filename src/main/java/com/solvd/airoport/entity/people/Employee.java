@@ -19,7 +19,12 @@ public abstract class Employee extends Person {
     //todo method calculate experience on current title and experience at all in some field
 
     public Employee() {
-        LOGGER.debug("create new DriverLicense");
+        LOGGER.debug("create new Employee");
+    }
+
+    public Employee(String name, String surname, Integer age)  {
+        super(name, surname, Gender.OTHER, age);
+        LOGGER.debug("create new Employee with name, surname and age");
     }
 
     public Employee(String name, String surname, Gender gender, Integer age, String department, AccessLevel accessLevel,

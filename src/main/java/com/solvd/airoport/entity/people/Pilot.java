@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Pilot extends Employee {
+public class Pilot extends Employee implements Runnable {
 
     private PilotLicense license;
     private PilotRank rank;
@@ -26,6 +26,11 @@ public class Pilot extends Employee {
 
     public Pilot() {
         LOGGER.debug("create new Pilot");
+    }
+
+    public Pilot(String name, String surname, Integer age) {
+        super(name, surname, age);
+        LOGGER.debug("create new Pilot with name, surname and age");
     }
 
     public Pilot(String name, String surname, Gender gender, Integer age, String department, AccessLevel accessLevel,
@@ -145,5 +150,10 @@ public class Pilot extends Employee {
                 ", isMilitaryExperience=" + isMilitaryExperience +
                 ", flightHours=" + flightHours +
                 "} " + super.toString();
+    }
+
+    @Override
+    public void run() {
+
     }
 }

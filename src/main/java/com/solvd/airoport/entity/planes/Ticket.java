@@ -1,5 +1,6 @@
 package com.solvd.airoport.entity.planes;
 
+import com.solvd.airoport.entity.interfaces.IFileNameCreator;
 import com.solvd.airoport.entity.interfaces.IPrint;
 import com.solvd.airoport.entity.people.Passenger;
 import com.solvd.airoport.exceptions.TicketIOException;
@@ -81,9 +82,13 @@ public class Ticket implements IPrint {
     @Override
     public void print() {
         LOGGER.info("call printTicket()");
-        String fileName = passenger.getName() + '_' + passenger.getSurname() +
-                '_' + trip.getFrom() +
-                '_' + trip.getTo();
+        IFileNameCreator fileNameCreator = (params) -> {
+            LOGGER.debug("create file name with lambda");
+            return String.join("_", params);
+        };
+
+        String fileName = fileNameCreator.setFileName(passenger.getName(), passenger.getSurname(), trip.getFrom()
+                , trip.getTo());
         LOGGER.debug("set ticket file name as: " + fileName);
         try {
             LOGGER.info("print ticket");
@@ -98,8 +103,7 @@ public class Ticket implements IPrint {
 
     private void setContent(String companyName, String path, String fileName, IPrint ticket) throws IOException {
         LOGGER.info("call setContent method");
-        try (FileWriter fileWriter = new FileWriter(path + fileName, false))
-        {
+        try (FileWriter fileWriter = new FileWriter(path + fileName, false)) {
             fileWriter.write(companyName);
             fileWriter.append('\n');
             fileWriter.write(getPassengerFullName());

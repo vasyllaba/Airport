@@ -3,7 +3,8 @@ package com.solvd.airoport.entity.enums;
 public enum Gender {
 
     MALE("male"),
-    FEMALE("female");
+    FEMALE("female"),
+    OTHER("other");
 
     Gender(String gender) {
         this.gender = gender;

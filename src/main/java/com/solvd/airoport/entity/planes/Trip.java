@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
-public class Trip {//rename to trip
+public class Trip {
     private PassengerPlane plane;
     private ArrayList<Pilot> pilots;
     private ArrayList<Steward> stewards;
@@ -141,7 +141,7 @@ public class Trip {//rename to trip
         LOGGER.debug("Check pilots allergy");
         boolean flag = false;
         for (Pilot currentPilot: pilots) {
-            if (!currentPilot.getFoodAllergy().equals(pilot.getFoodAllergy()))
+            if (currentPilot.getFoodAllergy().equals(null) || !currentPilot.getFoodAllergy().equals(pilot.getFoodAllergy()))
                 flag = true;
         }
         return flag;
